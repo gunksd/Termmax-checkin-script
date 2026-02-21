@@ -62,10 +62,28 @@ GAS_MULTIPLIER = 1.2             # ← Gas 估算倍数，一般不用改
 
 ---
 
-## 第三步：修改 .env
+## 第三步：配置私钥和 RPC
+
+### keys.txt — 私钥文件
+
+从示例复制再编辑：
+
+```bash
+cp keys.example.txt keys.txt
+```
+
+一行一个私钥，直接粘贴，数量不限，支持 `#` 注释：
+
+```
+0xaabbccdd...
+0xeeff0011...
+0x22334455...
+# 这行是注释，会被忽略
+```
+
+### .env — RPC 配置（可选）
 
 ```env
-PRIVATE_KEYS=你的私钥1,你的私钥2
 BSC_RPC=https://对应链的RPC地址/
 ```
 
@@ -119,14 +137,20 @@ CHAIN_ID = 42161
 DEFAULT_RPC = "https://arb1.arbitrum.io/rpc"
 ```
 
-**2. .env 改成：**
+**2. keys.txt 填入私钥（一行一个）：**
+
+```
+0xaaaa...
+0xbbbb...
+```
+
+**3. .env 改 RPC（可选）：**
 
 ```env
-PRIVATE_KEYS=你的私钥1,你的私钥2
 BSC_RPC=https://arb1.arbitrum.io/rpc
 ```
 
-**3. 运行：**
+**4. 运行：**
 
 ```bash
 python checkin.py

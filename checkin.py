@@ -17,14 +17,15 @@ GAS_MULTIPLIER = 1.2  # buffer for gas estimation
 
 
 def load_private_keys():
-    load_dotenv()
-    raw = os.getenv("PRIVATE_KEYS", "")
-    if not raw:
-        print("[ERROR] PRIVATE_KEYS not found in .env")
+    keys_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "keys.txt")
+    if not os.path.exists(keys_file):
+        print(f"[ERROR] keys.txt not found")
+        print(f"[INFO]  Create keys.txt with one private key per line")
         sys.exit(1)
-    keys = [k.strip() for k in raw.split(",") if k.strip()]
+    with open(keys_file, "r") as f:
+        keys = [line.strip() for line in f if line.strip() and not line.startswith("#")]
     if not keys:
-        print("[ERROR] No valid private keys found")
+        print("[ERROR] No private keys found in keys.txt")
         sys.exit(1)
     return keys
 

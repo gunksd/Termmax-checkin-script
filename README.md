@@ -18,21 +18,32 @@ BSC 链上 Termmax 合约自动签到脚本，支持多钱包批量签到。
 pip install -r requirements.txt
 
 # 2. 配置私钥
-cp .env.example .env
-# 编辑 .env，填入私钥（多个用逗号分隔）
+cp keys.example.txt keys.txt
+# 编辑 keys.txt，把私钥粘贴进去（一行一个）
 
-# 3. 运行
+# 3. 配置 RPC（可选）
+cp .env.example .env
+
+# 4. 运行
 python checkin.py
 ```
 
 ## 配置说明
 
-编辑 `.env` 文件：
+### keys.txt — 私钥文件
+
+一行一个私钥，支持 `#` 注释，数量不限：
+
+```
+0xaabbccdd...
+0xeeff0011...
+0x22334455...
+# 这是注释，会被忽略
+```
+
+### .env — RPC 配置（可选）
 
 ```env
-# 私钥，多个用逗号分隔（不要带 0x 前缀也行，脚本会自动处理）
-PRIVATE_KEYS=aabbcc...,ddeeff...
-
 # RPC 节点（可选，默认使用 BSC 公共节点）
 BSC_RPC=https://bsc-dataseed.binance.org/
 ```
@@ -76,6 +87,6 @@ DEFAULT_RPC = "https://..."      # RPC 节点
 
 ## 安全提醒
 
-- `.env` 已被 `.gitignore` 排除，不会被提交到 git
+- `.env` 和 `keys.txt` 已被 `.gitignore` 排除，不会被提交到 git
 - 私钥仅在本地使用，不会上传到任何服务器
 - 请勿在公共环境运行此脚本
